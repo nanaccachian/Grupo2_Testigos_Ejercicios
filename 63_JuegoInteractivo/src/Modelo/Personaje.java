@@ -23,6 +23,13 @@ public abstract class Personaje implements Cloneable{
     public void usarHabilidad(Habilidad habilidad) {
         habilidad.usar(this);
     }
+    
+    public void definirCaracteristicas() {
+        personalidadInteligencia();
+        personalidadImagen();
+        caracteristicaAltura();
+        caracteristicaPeso();
+    } 
 
     public void personalidadInteligencia() {
         if (inteligencia > 60) //VALOR ARBITRARIO
