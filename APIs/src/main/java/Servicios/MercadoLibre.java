@@ -1,7 +1,15 @@
 package Servicios;
 
+import Domain.ListadoDeMunicipios;
+import Domain.ListadoDeProvincias;
+import Domain.ListadoDeProvinciasML;
+import Domain.*;
+import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.io.IOException;
 
 public class MercadoLibre {
 
@@ -25,5 +33,28 @@ public class MercadoLibre {
             return instancia;
         }
 
+        public ListadoDeProvinciasML listadoDeProvinciasML() throws IOException {
+            MLServices MLServices = this.retrofit.create(MLServices.class);
+
+            Call<ListadoDeProvinciasML> requestProvinciasArgentinas = MLServices.provinciasML("AR");
+
+            Response<ListadoDeProvinciasML> responseProvinciasArgentinas = requestProvinciasArgentinas.execute();
+
+            ListadoDeProvinciasML provinciasArgentinas = responseProvinciasArgentinas.body();
+
+            return provinciasArgentinas;
+        }
+
+        public ListadoDeMunicipiosML listadoDeMunicipiosDeProvinciaML(ProvinciasML provincia) throws IOException {
+            MLServices MLServices = this.retrofit.create(MLServices.class);
+
+            Call<ListadoDeMunicipiosML> requestListadoDeMunicipios = MLServices.municipiosML(provincia.getId(), "id, nombre", maximaCantidadRegistrosDefault);
+
+            Response<ListadoDeMunicipiosML> responseListadoDeMunicipios = requestListadoDeMunicipios.execute();
+
+            ListadoDeMunicipiosML listadoDeMunicipiosML = responseListadoDeMunicipios.body();
+
+            return listadoDeMunicipiosML;
+        }
     }
 }
