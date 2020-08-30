@@ -1,12 +1,19 @@
 package Dominio;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lector extends Persona{
-    private final List<Prestamo> prestamos = new ArrayList<>();
+@Entity
+@Table(name = "lectores")
+public class Lector extends Persona {
 
-    public Lector() { }
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "lector")
+    public final List<Prestamo> prestamos = new ArrayList<>();
+
+    public Lector(int dni, String nombre) {
+        super(dni, nombre);
+    }
 
     public void agregarPrestamo(Prestamo prestamo) {
         if (prestamos.size() < 3)
@@ -18,6 +25,8 @@ public class Lector extends Persona{
     }
 
     public boolean puedePedirPrestamo() {
-        return prestamos.stream().anyMatch(prestamo -> !prestamo.getMulta());
+        return prestamos.stream().anyMatch(prestamo -> prestamo.getMulta() != 0);
     }
+
+
 }
