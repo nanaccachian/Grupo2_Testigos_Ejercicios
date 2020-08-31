@@ -31,7 +31,7 @@ public class Test {
         Autor autor = new Autor(123, "Hernesto", "argentino", LocalDate.of(1999,12,13));
 
         Libro libro1 = new Libro("buenos dias", autor, "policial", 2010,"Estrada");
-        Copia copia1 = new Dominio.Copia("Prestamo",libro1);
+        Copia copia1 = new Dominio.Copia(libro1);
 
         Lector lector45 = new Lector(89,"Pedrito");
         Prestamo prestamo = new Prestamo(lector45,copia1);

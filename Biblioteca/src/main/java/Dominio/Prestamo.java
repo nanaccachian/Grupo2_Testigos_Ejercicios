@@ -24,23 +24,29 @@ public class Prestamo {
     @Column(columnDefinition = "DATE")
     private LocalDate fechaDeInicio;
 
-    @Column
-    private long multa;
-
-    public long getMulta() {
-        return multa;
+    public LocalDate getFechaDeInicio() {
+        return fechaDeInicio;
     }
 
-    public void multar() {
-        long a = DAYS.between(LocalDate.now(),fechaDeInicio);
-        if (a > 30)
-            multa = a*2;
+    public Lector getLector() {
+        return lector;
     }
 
     public Prestamo(Lector lector, Copia copia) {
         this.lector = lector;
         this.copia = copia;
         this.fechaDeInicio = LocalDate.now();
-        this.multa = 0;
+    }
+
+    public void setLector(Lector lector) {
+        this.lector = lector;
+    }
+
+    public Copia getCopia() {
+        return copia;
+    }
+
+    public int getId() {
+        return id;
     }
 }

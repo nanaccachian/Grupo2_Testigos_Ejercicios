@@ -1,15 +1,21 @@
 package Dominio;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Entity
 @Table(name = "lectores")
 public class Lector extends Persona {
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "lector")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lector")
     public final List<Prestamo> prestamos = new ArrayList<>();
+
+    @Column
+    private long multa = 0;
 
     public Lector(int dni, String nombre) {
         super(dni, nombre);
@@ -20,13 +26,24 @@ public class Lector extends Persona {
             prestamos.add(prestamo);
     }
 
+    public long getMulta() {
+        return multa;
+    }
+
+    public void multar() {
+        multa = 0;
+        for(Prestamo prestamo:prestamos) {
+            long a = DAYS.between(prestamo.getFechaDeInicio(),LocalDate.now());
+            if (a > 30)
+                multa += 2*a;
+        }
+    }
+
     public void eliminarPrestamo(Prestamo prestamo) {
         prestamos.remove(prestamo);
     }
 
     public boolean puedePedirPrestamo() {
-        return prestamos.stream().anyMatch(prestamo -> prestamo.getMulta() != 0);
+        return multa == 0;
     }
-
-
 }

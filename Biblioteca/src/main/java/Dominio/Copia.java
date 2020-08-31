@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Copia {
 
     @Column
-    public String estado;
+    public String estado = "Presente";
 
     @ManyToOne
     @JoinColumn(name = "libro_id",referencedColumnName = "id")
@@ -17,8 +17,15 @@ public class Copia {
     @GeneratedValue
     public int id;
 
-    public Copia(String estado, Libro libro) {
+    public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public Copia(Libro libro) {
         this.libro = libro;
     }
 }
