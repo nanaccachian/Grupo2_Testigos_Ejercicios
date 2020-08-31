@@ -1,6 +1,5 @@
 package Dominio;
 
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
