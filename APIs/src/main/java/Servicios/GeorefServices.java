@@ -10,6 +10,9 @@ interface GeorefService {
     Call<ListadoDeProvincias> provincias();
 
     @GET("provincias")
+    Call<ProvinciaGR> provincia(@Query("nombre") String nombre);
+
+    @GET("provincias")
     Call<ListadoDeProvincias> provincias(@Query("campos") String campos);
 
     @GET("municipios")
@@ -20,4 +23,5 @@ interface GeorefService {
 
     @GET("municipios")
     Call<ListadoDeMunicipios> municipios(@Query("provincia") int idProvincia, @Query("campos") String campos, @Query("max") int max);
+
 }

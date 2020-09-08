@@ -43,5 +43,17 @@ public class GeoRef {
             ListadoDeMunicipios listadoDeMunicipios = responseListadoDeMunicipios.body();
             return listadoDeMunicipios;
         }
+
+        public ListadoDeMunicipios listadoDeMunicipiosDeProvinciaConNombre(String name) throws IOException {
+            GeorefService georefService = this.retrofit.create(GeorefService.class);
+            Call<ProvinciaGR> requestProvincia = georefService.provincia(name);
+            Response<ProvinciaGR> responseProvincia = requestProvincia.execute();
+            ProvinciaGR prov = responseProvincia.body();
+            Call<ListadoDeMunicipios> requestListadoDeMunicipios = georefService.municipios(prov.getId(), "id, nombre", maximaCantidadRegistrosDefault);
+            Response<ListadoDeMunicipios> responseListadoDeMunicipios = requestListadoDeMunicipios.execute();
+            ListadoDeMunicipios listadoDeMunicipios = responseListadoDeMunicipios.body();
+            return listadoDeMunicipios;
+        }
+
     }
 }
