@@ -36,7 +36,7 @@ public class MercadoLibre {
         public ListadoDeProvinciasML listadoDeProvinciasML() throws IOException {
             MLServices MLServices = this.retrofit.create(MLServices.class);
 
-            Call<ListadoDeProvinciasML> requestProvinciasArgentinas = MLServices.provinciasML("AR");
+            Call<ListadoDeProvinciasML> requestProvinciasArgentinas = MLServices.provinciasML();
 
             Response<ListadoDeProvinciasML> responseProvinciasArgentinas = requestProvinciasArgentinas.execute();
 
@@ -48,7 +48,7 @@ public class MercadoLibre {
         public ListadoDeMunicipiosML listadoDeMunicipiosDeProvinciaML(ProvinciasML provincia) throws IOException {
             MLServices MLServices = this.retrofit.create(MLServices.class);
 
-            Call<ListadoDeMunicipiosML> requestListadoDeMunicipios = MLServices.municipiosML(provincia.getId(), "id, nombre", maximaCantidadRegistrosDefault);
+            Call<ListadoDeMunicipiosML> requestListadoDeMunicipios = MLServices.municipiosML(provincia.getId());
 
             Response<ListadoDeMunicipiosML> responseListadoDeMunicipios = requestListadoDeMunicipios.execute();
 
