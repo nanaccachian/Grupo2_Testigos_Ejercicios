@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  <body background="imagenes/1812.jpg">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,26 +13,31 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+</html>
     <!-- Sección inicial -->
 
     <!-- Sección de ingresar nuevo producto -->
     <div class="new_product" id="new_product">
-      <h1>Ingresar nuevo producto</h1>
-
+      <h1 class = "titulo">  Ingresar nuevo producto</h1>
+      <img style = "float: right;" src = "imagenes/geoc.png" alt = "imagen" width="150">
       <label for="tipo_producto">Categoría del producto:</label>
-
-      <select name="tipo_producto" id="tipo_producto">
+      <div>
+      <select class = "select-css" name = "tipo_producto" id="tipo_producto">
         <option value="OnDemand">OnDemand</option>
         <option value="Rotación">Rotación</option>
         <option value="Estándar">Estándar</option>
       </select>
+      </div>
       <br /><br />
-
       <label for="empresa_proveedora"
         >Ingrese el nombre de la empresa proveedora:</label
       >
-      <input type="text" id="empresa_proveedora" name="empresa_proveedora" />
+      <textarea
+        id="descripcion"
+        name="descripcion"
+        rows="4"
+        cols="50"
+        ></textarea>
       <br /><br />
       <label for="descripcion">Ingrese una descripción:</label>
       <textarea
@@ -41,7 +47,12 @@
         cols="50"
       ></textarea>
     </div>
+    <button style="vertical-align:middle" class="button">Ingresar producto
+    </button>
+    
 
     <!-- Otras secciones -->
   </body>
 </html>
+
+
